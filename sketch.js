@@ -53,8 +53,6 @@ function setup(){
     // font selector
     f2.add(params, 'font', {Avenir : "../fonts/AvenirNextLTW01-Medium.woff", BlackOpsOne : "../fonts/Black_Ops_One/BlackOpsOne-Regular.ttf",
                             Comfortaa : "../fonts/Comfortaa/Comfortaa-Bold.ttf",
-                            NovaMono : "../fonts/Nova_Mono/NovaMono.ttf", ShadowsIntoLight : "../fonts/Shadows_Into_Light/ShadowsIntoLight.ttf",
-                            Sniglet: "../fonts/Sniglet/Sniglet-ExtraBold.ttf",Tangerine : "../fonts/Tangerine/Tangerine_Bold.ttf",
                             UnicaOne : "../fonts/Unica_One/UnicaOne-Regular.ttf"});
     f2.add(params, 'message');
     f2.add(params, 'spacing', 2, 40).listen();
