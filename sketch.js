@@ -18,17 +18,17 @@ var particles = [];
 // a polygon being an array of vectors with x/y coordinates
 function getPoints(){
     drawing = false;
-    f = new Rune.Font(params.font) 
+    f = new Rune.Font(params.font)
     particles = [];
 
-    f.load(function(err){       
+    f.load(function(err){
         path = f.toPath(params.message, 0, 0, params.size)
         polys = path.toPolygons({ spacing:params.spacing })
 
         for (var j=0; j < polys.length; j++){ // get each polygon (letter)
-                var poly = polys[j];      
+                var poly = polys[j];
                 for(var k = 0; k < poly.state.vectors.length; k++) { // get each point of each polygon
-                    var vec = poly.state.vectors[k];       
+                    var vec = poly.state.vectors[k];
                     // push particles into the outline of the letter.
                     particles.push(new Particle(random(0-params.xoffset,windowWidth-params.xoffset), random(0-params.yoffset,windowHeight-params.yoffset), vec.x,vec.y));
                 }
@@ -39,7 +39,7 @@ function getPoints(){
 
 
 function setup(){
-    createCanvas(windowWidth,windowHeight)  
+    createCanvas(windowWidth,windowHeight)
     background(0)
 
     params = new Parameters();
@@ -48,14 +48,14 @@ function setup(){
     // gui setup
     var f2 = gui.addFolder('configuration / path generation');
     var f1 = gui.addFolder('real-time parameters');
-    
+
     // Configuration parameters
     // font selector
     f2.add(params, 'font', {Avenir : "../fonts/AvenirNextLTW01-Medium.woff", BlackOpsOne : "../fonts/Black_Ops_One/BlackOpsOne-Regular.ttf",
                             Comfortaa : "../fonts/Comfortaa/Comfortaa-Bold.ttf",
-                            NovaMono : "../fonts/Nova_Mono/NovaMono.ttf", ShadowsIntoLight : "../fonts/Shadows_Into_Light/ShadowsIntoLight.ttf", 
+                            NovaMono : "../fonts/Nova_Mono/NovaMono.ttf", ShadowsIntoLight : "../fonts/Shadows_Into_Light/ShadowsIntoLight.ttf",
                             Sniglet: "../fonts/Sniglet/Sniglet-ExtraBold.ttf",Tangerine : "../fonts/Tangerine/Tangerine_Bold.ttf",
-                            UnicaOne : "../fonts/Unica_One/UnicaOne-Regular.ttf"});  
+                            UnicaOne : "../fonts/Unica_One/UnicaOne-Regular.ttf"});
     f2.add(params, 'message');
     f2.add(params, 'spacing', 2, 40).listen();
     f2.add(params, 'size', 100, 1000).listen();
@@ -92,11 +92,11 @@ function draw(){    // draw is an infinite loop that runs until the page is clos
                 // stroke(params.color);
                 // stroke([24,133,13,7.5]);
             for (var i = 0 ; i < particles.length ; i++){
-                particles[i].attract(); 
+                particles[i].attract();
                 particles[i].repulse(mouseX,mouseY);
-                particles[i].check_bounds();  
-                particles[i].update(); 
-                particles[i].draw();  
+                particles[i].check_bounds();
+                particles[i].update();
+                particles[i].draw();
             }
             pop();
     }
@@ -124,19 +124,19 @@ function Particle(x,y,tx,ty){
     this.yspeed = sign * random(1,2)
 
     //this.xspeed = 0;
-    //this.yspeed = 0;    
+    //this.yspeed = 0;
 
     this.xacc = 0;
     this.yacc = 0;
 
     this.targetX = tx;
     this.targetY = ty;
-   
+
     // Draw particle, fill with colour and set size based on params.
     this.draw = function(){
         fill(params.color);
         noStroke();
-        ellipse(this.x, this.y, params.particle_size*this.size, params.particle_size*this.size);        
+        ellipse(this.x, this.y, params.particle_size*this.size, params.particle_size*this.size);
     }
 
     this.update = function(){
@@ -152,7 +152,7 @@ function Particle(x,y,tx,ty){
 
     this.check_bounds = function(){
         if (this.x < 0-params.xoffset || this.x> windowWidth-params.xoffset){
-            this.xspeed = - this.xspeed;   
+            this.xspeed = - this.xspeed;
         }
         else if (this.y<0-params.yoffset || this.y>windowHeight-params.yoffset){
             this.yspeed = - this.yspeed;
@@ -193,7 +193,7 @@ function Particle(x,y,tx,ty){
         this.xacc += frict.x;
         this.yacc += frict.y;
 
-       
+
         var dir = vpos.sub(vtarget);
         var d = dir.mag();
         dir.normalize();
@@ -213,16 +213,16 @@ var Parameters = function(){
     this.spacing = 5;
     this.size = 375;
 
-    this.background = [0,0,0,25 ]; 
+    this.background = [0,0,0,25 ];
     this.color = [255,255,255,7.5];
     this.particle_size = 10;
     this.repulsion_threshold = 150;
 
-    this.xoffset = windowWidth/3 - this.size/2  
+    this.xoffset = windowWidth/3 - this.size/2
     this.yoffset = windowHeight/2
 
     this.regenerate = function(){
-        background(0); 
+        background(0);
         getPoints();
     }
 
@@ -231,14 +231,14 @@ var Parameters = function(){
     }
 
     this.clear = function(){
-        background(0); 
+        background(0);
     }
 
     this.preset0 = function(){
         this.spacing = 3;
         this.size = 400;
 
-        this.background = [0,0,0,25]; 
+        this.background = [0,0,0,25];
         this.color = [237,34,93,8];
         this.particle_size = 10;
         this.repulsion_threshold = 150;
@@ -248,7 +248,7 @@ var Parameters = function(){
         this.spacing = 10;
         this.size = 400;
 
-        this.background = [0,0,0,50]; 
+        this.background = [0,0,0,50];
         this.color = [237,34,93];
         this.particle_size = 2;
         this.repulsion_threshold = 50;
@@ -263,8 +263,10 @@ var Parameters = function(){
         // TODO: Different colour particles
         //
         // TODO: Slight particle movement when mouse is still.
+        // TODO: Using something like: https://p5js.org/examples/math-noise-wave.html
+        // TODO: Can the noise be a realtime param? To take musical note/freq instead of random noise?
 
-        this.background = [0,0,0,50]; 
+        this.background = [0,0,0,50];
         // this.color = [237,34,93,7];
         this.color = [255,255,255,7];
 
@@ -272,3 +274,62 @@ var Parameters = function(){
         this.repulsion_threshold = 50;
     }
 }
+
+
+
+
+// Chladni pattern functions:
+
+
+// http://paulbourke.net/geometry/chladni/
+// var m = 10;
+// var n = 2;
+// var epsilon = 0.05;
+// var pg
+
+// function setup() {
+//     createCanvas(windowWidth, windowHeight);
+//     pg = createGraphics(320, 240)
+//     pg.background(0);
+//     pg.pixelDensity(1)
+//     pixelDensity(1)
+// }
+
+// function draw() {
+//     m = map(mouseX, 0, width, 1, 20);
+//     n = map(mouseY, 0, height, 1, 20);
+
+//     pg.strokeWeight(1.5)
+//     pg.background(0);
+//     pg.noFill()
+//     //pg.fill(255)
+//     pg.stroke(255, 15);
+
+//     for (var y = 0; y < pg.height; y++) {
+//         for (var x = 0; x < pg.width; x++) {
+//             var chladni = cos(n * PI * x / pg.width) * cos(m * PI * y / pg.width) - cos(m * PI * x / pg.width) * cos(n * PI * y / pg.width);
+//             if (abs(chladni) <= epsilon) {
+//                 pg.ellipse(x, y, 20,20);
+//             }
+//         }
+//     }
+
+//     for (var i = 0; i < windowWidth / pg.width; i++) {
+//         for (var j = 0; j < windowWidth / pg.width; j++) {
+
+//             image(pg, i*pg.width, j*pg.height)
+//         }
+//     }
+
+
+//     /*
+//     var params = "m=" + int(m) + "; n=" + int(n) + "; epsilon=" + epsilon;
+//     fill(0, 205, 255);
+//     textSize(20)
+//     text(params, 5, 15);*/
+
+// }
+
+// function windowResized() {
+//     resizeCanvas(windowWidth, windowHeight);
+// }
