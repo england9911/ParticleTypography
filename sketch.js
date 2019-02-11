@@ -53,7 +53,8 @@ function setup(){
     // font selector
     f2.add(params, 'font', {Avenir : "../fonts/AvenirNextLTW01-Medium.woff", BlackOpsOne : "../fonts/Black_Ops_One/BlackOpsOne-Regular.ttf",
                             Comfortaa : "../fonts/Comfortaa/Comfortaa-Bold.ttf",
-                            UnicaOne : "../fonts/Unica_One/UnicaOne-Regular.ttf"});
+                            UnicaOne : "../fonts/Unica_One/UnicaOne-Regular.ttf",
+                            Frequency : "../fonts/Frequency/Frequency_wav_AW.ttf"});
     f2.add(params, 'message');
     f2.add(params, 'spacing', 2, 40).listen();
     f2.add(params, 'size', 100, 1000).listen();
@@ -206,7 +207,7 @@ function Particle(x,y,tx,ty){
 
 var Parameters = function(){
 
-    this.font = "../fonts/Unica_One/UnicaOne-Regular.ttf"
+    this.font = "../fonts/Frequency/Frequency_wav_AW.ttf";
     this.message = 'LOUDER';
     this.spacing = 5;
     this.size = 375;
