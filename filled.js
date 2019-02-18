@@ -50,6 +50,8 @@ function draw(){    // draw is an infinite loop that runs until the page is clos
 
         translate(params.xoffset, params.yoffset);
 
+        // @TODO: Figure out how push/pop might help applying distortion to the whole word, not just one letter: https://www.youtube.com/watch?v=o9sgjuh-CBM
+
         // Each polygon.
         for (var i = 0 ; i < polys.length ; i++) {
 
@@ -90,7 +92,7 @@ function Letter(letterVectors, prevVectors){
     }
 
     this.polygonContained = function(currentVectors, prevVectors) {
-        
+
         for (var j = 0 ; j < currentVectors.length ; j++) {
             if(this.pointInPolygon(letterVectors[j], prevVectors)) {
                 return true;
