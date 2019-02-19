@@ -14,6 +14,9 @@ var gui, params; // store gui related things.
 var anchorX, anchorY;
 var particles = [];
 
+let yoff = 0.0; // 2nd dimension of perlin noise
+
+
 // Loads a font, and creates an array of polygons
 // a polygon being an array of vectors with x/y coordinates
 function getPoints(){
@@ -40,9 +43,10 @@ function setup(){
 
 
 function draw(){    // draw is an infinite loop that runs until the page is closed.
-    
+
     // Background paint.
     noStroke();
+    smooth();
     fill(params.background)
     rect(0,0,windowWidth,windowHeight)
 
@@ -50,7 +54,10 @@ function draw(){    // draw is an infinite loop that runs until the page is clos
 
         translate(params.xoffset, params.yoffset);
 
-        // @TODO: Figure out how push/pop might help applying distortion to the whole word, not just one letter: https://www.youtube.com/watch?v=o9sgjuh-CBM
+        // translate(mouseX, mouseY);
+
+        // @TODO: Apply any distortion here so it effects the whole.
+        // rotate(radians(frameCount));
 
         // Each polygon.
         for (var i = 0 ; i < polys.length ; i++) {
@@ -59,7 +66,7 @@ function draw(){    // draw is an infinite loop that runs until the page is clos
 
             if(typeof polys[i-1] !== 'undefined') {
                 var thisLetter = new Letter(letterVectors, polys[i-1].state.vectors);
-            } 
+            }
             else {
                 var thisLetter = new Letter(letterVectors);
             }
@@ -69,24 +76,45 @@ function draw(){    // draw is an infinite loop that runs until the page is clos
 }
 
 function Letter(letterVectors, prevVectors){
-    
+
     this.draw = function(){
- 
+
         noStroke();
+        smooth();
 
         // Detect if current polygon was contained inside the previous polygon.
         // In that case, we're drawing the center / hole in a letter so the fill
         // can be inverted.
         if(this.polygonContained(letterVectors, prevVectors)) {
             fill(0);
-        } 
+        }
         else {
             fill(255);
         }
 
         beginShape();
+
+        let xoff = 0;
+
         for (var j = 0 ; j < letterVectors.length ; j++) {
-            vertex(letterVectors[j].x, letterVectors[j].y);
+
+            x = letterVectors[j].x;
+            y = letterVectors[j].y;
+
+
+            // Option #1: 2D Noise
+            // map(value, start1, stop1, start2, stop2)
+            // x = map(noise(xoff, yoff), 0, 0.5, x, x + (mouseX / 20));
+            x = map(noise(xoff, yoff), 0, 1, x, x + mouseX);
+
+
+            // Option #2: 1D Noise
+            // x = map(noise(yoff), 0, 1, x, x + 10);
+
+            vertex(x, y);
+
+            // increment y dimension for noise
+            yoff += 0.01;
         }
         endShape(CLOSE);
     }
