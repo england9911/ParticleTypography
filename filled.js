@@ -101,6 +101,8 @@ function Letter(letterVectors, prevVectors){
             x = letterVectors[j].x;
             y = letterVectors[j].y;
 
+            // @TODO: Replace noise function with Chladni.
+            // https://p5js.org/examples/math-noise-wave.html
 
             // Option #1: 2D Noise
             // map(value, start1, stop1, start2, stop2)
@@ -279,6 +281,6 @@ var Parameters = function(){
 
 // }
 
-// function windowResized() {
-//     resizeCanvas(windowWidth, windowHeight);
-// }
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+}
