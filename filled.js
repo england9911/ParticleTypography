@@ -107,8 +107,7 @@ function Letter(letterVectors, prevVectors){
             // Option #1: 2D Noise
             // map(value, start1, stop1, start2, stop2)
             // x = map(noise(xoff, yoff), 0, 0.5, x, x + (mouseX / 20));
-            x = map(noise(xoff, yoff), 0, 75, x, x + mouseX);
-
+            x = map(noise(xoff, yoff), 0, 1, x, x + mouseX);
 
             // Option #2: 1D Noise
             // x = map(noise(yoff), 0, 1, x, x + 10);
@@ -162,7 +161,7 @@ function Letter(letterVectors, prevVectors){
 var Parameters = function(){
 
     this.font = "../fonts/Frequency/Frequency_AW.ttf";
-    this.message = 'LOUDER';
+    this.message = 'LOUDER.';
     this.spacing = 1;
     this.size = window.innerWidth / 4;
 
@@ -211,10 +210,6 @@ var Parameters = function(){
         this.spacing = 8;
         this.size = 375;
 
-        // TODO: Solid letters - still with the repulsion on mouseover.
-        //
-        // TODO: Slight particle movement when mouse is still.
-        // TODO: Using something like: https://p5js.org/examples/math-noise-wave.html
         // TODO: Can the noise be a realtime param? To take musical note/freq instead of random noise?
 
         this.background = [0,0,0,50];
