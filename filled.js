@@ -105,7 +105,7 @@ function Letter(letterVectors, prevVectors){
             // Option #1: 2D Noise
             // map(value, start1, stop1, start2, stop2)
             // x = map(noise(xoff, yoff), 0, 0.5, x, x + (mouseX / 20));
-            x = map(noise(xoff, yoff), 0, 1, x, x + mouseX);
+            x = map(noise(xoff, yoff), 0, 75, x, x + mouseX);
 
 
             // Option #2: 1D Noise
