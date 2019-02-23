@@ -222,6 +222,25 @@ var Parameters = function(){
 }
 
 
+var makeChladni = function() {
+
+    // var m = 10;
+    // var n = 2;
+    // var epsilon = 0.05;
+    // var pg;
+
+    //     for (var y = 0; y < pg.height; y++) {
+    //         for (var x = 0; x < pg.width; x++) {
+    //             var chladni = cos(n * PI * x / pg.width) * cos(m * PI * y / pg.width) - cos(m * PI * x / pg.width) * cos(n * PI * y / pg.width);
+    //             if (abs(chladni) <= epsilon) {
+    //                 pg.ellipse(x, y, 20,20);
+    //             }
+    //         }
+    //     }
+    
+}
+
+
 
 
 // Chladni pattern functions:
